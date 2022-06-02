@@ -2,6 +2,8 @@
 # -*- coding: utf-8 -*-
 
 import argparse
+import tensorflow as tf
+tf.get_logger().setLevel('ERROR')
 
 from advntr.advntr_commands import genotype, view_model, add_model, del_model
 from advntr import settings
