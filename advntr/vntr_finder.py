@@ -651,7 +651,8 @@ class VNTRFinder:
         read_mode = self.get_alignment_file_read_mode(alignment_file)
         samfile = pysam.AlignmentFile(alignment_file, read_mode, reference_filename=self.reference_filename)
         reference = get_reference_genome_of_alignment_file(samfile)
-        chromosome = self.reference_vntr.chromosome if reference == 'HG19' else self.reference_vntr.chromosome[3:]
+        #handle chr or int based names better?
+        chromosome = self.reference_vntr.chromosome# if reference == 'HG19' else self.reference_vntr.chromosome[3:]
         for read in samfile.fetch(chromosome, vntr_start, vntr_end):
             if not recruitment_score:
                 read_length = len(read.seq)

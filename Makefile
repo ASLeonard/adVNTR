@@ -1,9 +1,7 @@
-CXX=g++ -g -std=c++0x
-ifeq ($(detected_OS),Darwin)        # Mac OS X
-	    CXX += -stdlib=libstdc++
-endif
-LDFLAGS = -I. -lm -O2 -lpthread
-PREFIX    = $(DESTDIR)/usr/local
+#CXX=g++ -g -std=c++0x
+CPPFLAGS = -O3 -mavx2 -flto -pipe
+LDFLAGS = -I. -lm -O2 -lpthread -s
+#PREFIX    = $(DESTDIR)/usr/local
 #PREFIX = /usr/local
 
 OBJDIR=.
@@ -16,12 +14,12 @@ $(OBJDIR):
 		if [ ! -d $(OBJDIR) ]; then mkdir $(OBJDIR); fi
 
 $(OBJDIR)/%.o: %.cc $(DEPS)
-		$(CXX) -c $(LDFLAGS) -o $@ $<
+		$(CXX) $(CPPFLAGS) -c $(LDFLAGS) -o $@ $<
 
 all: $(OBJDIR) adVNTR-Filtering
 
 adVNTR-Filtering: $(OBJS)
-		$(CXX) -o $@ $^ $(LDFLAGS)
+		$(CXX) $(CPPFLAGS) -o $@ $^ $(LDFLAGS)
 
 .PHONY: clean
 .PHONY: all

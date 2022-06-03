@@ -1,6 +1,6 @@
 setuptools
 matplotlib
-biopython==1.76
+biopython
 pysam>=0.9.1.4
 cython
 networkx
